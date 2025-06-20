@@ -54,6 +54,64 @@ const numeroSemaine = (date) => {
   return numSemaine;
 };
 
+// Jours fériés France métropolitaine avec nom (correction Pentecôte/Lundi de Pentecôte)
+function getJoursFeriesAvecNom(year) {
+  // Calcul de Pâques (algorithme de Meeus/Jones/Butcher)
+  const f = Math.floor,
+    G = year % 19,
+    C = f(year / 100),
+    H = (C - f(C / 4) - f((8 * C + 13) / 25) + 19 * G + 15) % 30,
+    I = H - f(H / 28) * (1 - f(29 / (H + 1)) * f((21 - G) / 11)),
+    J = (year + f(year / 4) + I + 2 - C + f(C / 4)) % 7,
+    L = I - J,
+    moisPaques = 3 + f((L + 40) / 44),
+    jourPaques = L + 28 - 31 * f(moisPaques / 4);
+
+  function dateFerie(mois, jour) {
+    return new Date(year, mois, jour);
+  }
+
+  // Jours fixes
+  const jours = [
+    { date: dateFerie(0, 1), nom: "Jour de l'an" },
+    { date: dateFerie(4, 1), nom: "Fête du Travail" },
+    { date: dateFerie(4, 8), nom: "Victoire 1945" },
+    { date: dateFerie(6, 14), nom: "Fête nationale" },
+    { date: dateFerie(7, 15), nom: "Assomption" },
+    { date: dateFerie(10, 1), nom: "Toussaint" },
+    { date: dateFerie(10, 11), nom: "Armistice" },
+    { date: dateFerie(11, 25), nom: "Noël" },
+  ];
+
+  // Jours mobiles
+  const paques = new Date(year, moisPaques - 1, jourPaques);
+  const lundiPaques = new Date(paques); lundiPaques.setDate(paques.getDate() + 1);
+  const ascension = new Date(paques); ascension.setDate(paques.getDate() + 39);
+  const pentecote = new Date(paques); pentecote.setDate(paques.getDate() + 49); // Dimanche de Pentecôte
+  const lundiPentecote = new Date(paques); lundiPentecote.setDate(paques.getDate() + 50); // Lundi de Pentecôte
+
+  jours.push(
+    { date: paques, nom: "Pâques" },
+    { date: lundiPaques, nom: "Lundi de Pâques" },
+    { date: ascension, nom: "Ascension" },
+    { date: pentecote, nom: "Pentecôte" },
+    { date: lundiPentecote, nom: "Lundi de Pentecôte" }
+  );
+
+  // On retourne un objet { 'YYYY-MM-DD': nom }
+  const map = {};
+  jours.forEach(j => {
+    map[j.date.toISOString().slice(0, 10)] = j.nom;
+  });
+  return map;
+}
+
+function getNomJourFerie(date) {
+  const feries = getJoursFeriesAvecNom(date.getFullYear());
+  const dateStr = date.toISOString().slice(0, 10);
+  return feries[dateStr] || null;
+}
+
 const CalendrierHebdo = ({ dateSelectionnee, onDateSelect, planningTravail, isMobile }) => {
   const [semaineCourante, setSemaineCourante] = useState(debutSemaine(new Date()));
   const aujourdHui = new Date();
@@ -190,19 +248,36 @@ const CalendrierHebdo = ({ dateSelectionnee, onDateSelect, planningTravail, isMo
               {jours.map((jour, idx) => {
                 const date = ajouterJours(semaineCourante, idx);
                 const estAujourdhui = memeJour(date, aujourdHui);
+                const nomFerie = getNomJourFerie(date);
+                const estFerie = !!nomFerie;
+                let bg = "#f8f9fa";
+                let color = "#333";
+                if (estAujourdhui) {
+                  bg = "#fff3e6";
+                  color = "#c58940";
+                } else if (estFerie) {
+                  bg = "#ffeaea";
+                  color = "#d32f2f";
+                }
                 return (
                   <th
                     key={jour}
                     style={{
                       ...stylesTableau.enteteJour,
-                      background: estAujourdhui ? "#fff3e6" : "#f8f9fa",
-                      color: estAujourdhui ? "#c58940" : "#333",
+                      background: bg,
+                      color: color,
                     }}
                   >
                     <div style={{ marginBottom: 2 }}>{jour}</div>
-                    <div style={{ fontSize: isMobile ? "0.80em" : "0.85em", color: "#888" }}>
+                    <div style={{ fontSize: isMobile ? "0.80em" : "0.85em", color: estFerie ? "#d32f2f" : "#888" }}>
                       {date.toLocaleDateString()}
+                      {estFerie && <span style={{ marginLeft: 4, fontWeight: 600 }}>🎉</span>}
                     </div>
+                    {estFerie && (
+                      <div style={{ fontSize: isMobile ? "0.77em" : "0.85em", color: "#d32f2f", fontWeight: 500 }}>
+                        {nomFerie}
+                      </div>
+                    )}
                   </th>
                 );
               })}
