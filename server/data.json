@@ -1,0 +1,30 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Toto",
+      "schedule": {
+        "monday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
+        "tuesday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
+        "wednesday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
+        "thursday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
+        "friday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
+        "saturday": { "startAM": "00:00", "endAM": "00:00", "startPM": "00:00", "endPM": "00:00" },
+        "sunday": { "startAM": "00:00", "endAM": "00:00", "startPM": "00:00", "endPM": "00:00" }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Tata",
+      "schedule": {
+        "monday": { "startAM": "08:30", "endAM": "12:00", "startPM": "13:00", "endPM": "16:30" },
+        "tuesday": { "startAM": "08:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
+        "wednesday": { "startAM": "08:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
+        "thursday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "18:00" },
+        "friday": { "startAM": "09:00", "endAM": "12:00", "startPM": "12:00", "endPM": "12:00" },
+        "saturday": { "startAM": "00:00", "endAM": "00:00", "startPM": "00:00", "endPM": "00:00" },
+        "sunday": { "startAM": "00:00", "endAM": "00:00", "startPM": "00:00", "endPM": "00:00" }
+      }
+    }
+  ]
+}
