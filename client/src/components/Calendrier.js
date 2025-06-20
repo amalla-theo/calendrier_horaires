@@ -1,48 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import CalendrierHebdo from './CalendrierHebdo';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Calendrier = () => {
-  const [serverMessage, setServerMessage] = useState('');
-  const [error, setError] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedEmployee, setSelectedEmployee] = useState('');
-  const [employees, setEmployees] = useState([]);
-  const [workSchedule, setWorkSchedule] = useState(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+  const dispatch = useDispatch();
+
+  const {
+    serverMessage,
+    error,
+    selectedDate,
+    selectedEmployee,
+    employees,
+    workSchedule,
+    isMobile
+  } = useSelector(state => state);
 
   useEffect(() => {
     // Test de connexion
     fetch('http://localhost:3001/api/test')
       .then(response => response.json())
-      .then(data => setServerMessage(data.message))
-      .catch(err => setError(err.message));
+      .then(data => dispatch({ type: 'SET_SERVER_MESSAGE', payload: data.message }))
+      .catch(err => dispatch({ type: 'SET_ERROR', payload: err.message }));
 
     // Chargement des données employés
     fetch('http://localhost:3001/api/employees')
       .then(response => response.json())
-      .then(data => setEmployees(data.employees))
-      .catch(err => setError('Erreur lors du chargement des employés: ' + err.message));
+      .then(data => dispatch({ type: 'SET_EMPLOYEES', payload: data.employees }))
+      .catch(err => dispatch({ type: 'SET_ERROR', payload: 'Erreur lors du chargement des employés: ' + err.message }));
 
     // Gestion du redimensionnement pour le responsive
-    const handleResize = () => setIsMobile(window.innerWidth < 700);
+    const handleResize = () => dispatch({ type: 'SET_IS_MOBILE', payload: window.innerWidth < 700 });
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [dispatch]);
 
   const handleDateSelect = (date) => {
-    setSelectedDate(date);
+    dispatch({ type: 'SET_SELECTED_DATE', payload: date });
   };
 
   const handleEmployeeChange = (event) => {
     const employeeId = parseInt(event.target.value);
-    setSelectedEmployee(employeeId);
+    dispatch({ type: 'SET_SELECTED_EMPLOYEE', payload: employeeId });
 
     // Trouver l'employé sélectionné et son planning
     const selectedEmp = employees.find(emp => emp.id === employeeId);
     if (selectedEmp) {
-      setWorkSchedule(selectedEmp.planning);
+      dispatch({ type: 'SET_WORK_SCHEDULE', payload: selectedEmp.planning });
     } else {
-      setWorkSchedule(null);
+      dispatch({ type: 'SET_WORK_SCHEDULE', payload: null });
     }
   };
 
