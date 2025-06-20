@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import WeeklyCalendar from './WeeklyCalendar';
+import CalendrierHebdo from './CalendrierHebdo'; // Correction ici
 
 const Calendrier = () => {
   const [serverMessage, setServerMessage] = useState('');
@@ -34,7 +34,7 @@ const Calendrier = () => {
     // Trouver l'employé sélectionné et son planning
     const selectedEmp = employees.find(emp => emp.id === employeeId);
     if (selectedEmp) {
-      setWorkSchedule(selectedEmp.schedule);
+      setWorkSchedule(selectedEmp.planning); // Correction ici
     } else {
       setWorkSchedule(null);
     }
@@ -64,10 +64,10 @@ const Calendrier = () => {
       </div>
 
       <div className="calendar-container">
-        <WeeklyCalendar
+        <CalendrierHebdo
           selectedDate={selectedDate}
           onDateSelect={handleDateSelect}
-          workSchedule={workSchedule}
+          planningTravail={workSchedule} // Correction ici
         />
       </div>
     </div>

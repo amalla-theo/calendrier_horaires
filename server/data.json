@@ -3,27 +3,49 @@
     {
       "id": 1,
       "name": "Toto",
-      "schedule": {
-        "monday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
-        "tuesday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
-        "wednesday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
-        "thursday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
-        "friday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
-        "saturday": { "startAM": "00:00", "endAM": "00:00", "startPM": "00:00", "endPM": "00:00" },
-        "sunday": { "startAM": "00:00", "endAM": "00:00", "startPM": "00:00", "endPM": "00:00" }
+      "planning": {
+        "paire": {
+          "lundi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "mardi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "mercredi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "jeudi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "vendredi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "samedi": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" },
+          "dimanche": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" }
+        },
+        "impaire": {
+          "lundi": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" },
+          "mardi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "mercredi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "jeudi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "vendredi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "samedi": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" },
+          "dimanche": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" }
+        }
       }
     },
     {
       "id": 2,
       "name": "Tata",
-      "schedule": {
-        "monday": { "startAM": "08:30", "endAM": "12:00", "startPM": "13:00", "endPM": "16:30" },
-        "tuesday": { "startAM": "08:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
-        "wednesday": { "startAM": "08:00", "endAM": "12:00", "startPM": "13:00", "endPM": "17:00" },
-        "thursday": { "startAM": "09:00", "endAM": "12:00", "startPM": "13:00", "endPM": "18:00" },
-        "friday": { "startAM": "09:00", "endAM": "12:00", "startPM": "12:00", "endPM": "12:00" },
-        "saturday": { "startAM": "00:00", "endAM": "00:00", "startPM": "00:00", "endPM": "00:00" },
-        "sunday": { "startAM": "00:00", "endAM": "00:00", "startPM": "00:00", "endPM": "00:00" }
+      "planning": {
+        "paire": {
+          "lundi": { "debutMatin": "08:30", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "16:30" },
+          "mardi": { "debutMatin": "08:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "mercredi": { "debutMatin": "08:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "jeudi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "18:00" },
+          "vendredi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "12:00", "finAprem": "12:00" },
+          "samedi": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" },
+          "dimanche": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" }
+        },
+        "impaire": {
+          "lundi": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" },
+          "mardi": { "debutMatin": "08:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "mercredi": { "debutMatin": "08:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "17:00" },
+          "jeudi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "13:00", "finAprem": "18:00" },
+          "vendredi": { "debutMatin": "09:00", "finMatin": "12:00", "debutAprem": "12:00", "finAprem": "12:00" },
+          "samedi": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" },
+          "dimanche": { "debutMatin": "00:00", "finMatin": "00:00", "debutAprem": "00:00", "finAprem": "00:00" }
+        }
       }
     }
   ]
